@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Guida al Comando Rapido</title>
+<style>
+  :root { color-scheme: light dark; --bg: #f4f6f3; --card: #fff; --text: #1c2420; --muted: #66736c; --accent: #1f7a5a; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #111513; --card: #1b211e; --text: #e8eee9; --muted: #9aa8a0; --accent: #4cc596; } }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.5 -apple-system, system-ui, sans-serif; }
+  main { max-width: 680px; margin: 0 auto; padding: 16px; }
+  section { background: var(--card); border-radius: 16px; padding: 14px 16px; margin: 12px 0; }
+  h1 { font-size: 1.5rem; } h2 { font-size: 1.1rem; margin-top: 0; }
+  code, .act { background: rgba(31,122,90,.12); border-radius: 6px; padding: 1px 6px; font-size: .92em; }
+  .act { font-weight: 600; }
+  li { margin: 6px 0; }
+  .muted { color: var(--muted); font-size: .9rem; }
+  a { color: var(--accent); }
+</style>
+</head>
+<body>
+<main>
+<h1>Comando Rapido «Salute: sincronizza»</h1>
+<p class="muted">Un’app web non può leggere direttamente Salute e Calendario. Questo comando legge i dati sul tuo iPhone
+e li passa all’app. Niente passa da un server: i dati viaggiano nell’indirizzo della pagina (dopo il simbolo #) o negli appunti.</p>
+
+<section>
+<h2>Prima di iniziare: Safari o Home?</h2>
+<p><strong>Consigliato:</strong> usa Salute in <strong>Safari</strong> (aggiungila ai Preferiti). Il comando apre la pagina in Safari e i dati arrivano da soli.</p>
+<p>Se l’hai aggiunta alla <strong>schermata Home</strong>, iOS le dà una memoria separata da Safari. In quel caso, al passo 6
+usa «Copia negli appunti», poi apri l’app e tocca <em>Profilo → Importa dagli appunti</em>.</p>
+</section>
+
+<section>
+<h2>1. Crea il comando</h2>
+<ol>
+<li>Apri l’app <strong>Comandi</strong> → <strong>+</strong> → chiamalo <code>Salute: sincronizza</code>.</li>
+</ol>
+</section>
+
+<section>
+<h2>2. Passi (ultimi 14 giorni)</h2>
+<ol>
+<li>Aggiungi <span class="act">Trova campioni di Salute</span>: Tipo <em>Passi</em>, Data di inizio <em>negli ultimi 14 giorni</em>, <em>Raggruppa per: Giorno</em>.</li>
+<li>Aggiungi <span class="act">Ripeti con ogni elemento</span>. Dentro la ripetizione aggiungi <span class="act">Testo</span> con:
+<br><code>S;</code> + variabile <em>Elemento ripetuto</em> → tocca la variabile → <em>Data di inizio</em> → Formato data <em>Personalizzato</em> <code>yyyy-MM-dd</code> + <code>;</code> + <em>Elemento ripetuto</em> → <em>Valore</em>.
+<br><span class="muted">Esempio di risultato: S;2026-11-18;8421</span></li>
+<li>Dopo «Fine ripetizione» aggiungi <span class="act">Combina testo</span> (Risultati ripetizione, separatore <em>Nuova riga</em>). Rinomina il risultato in <code>Passi</code>.</li>
+</ol>
+</section>
+
+<section>
+<h2>3. Peso e calorie attive (facoltativi ma utili)</h2>
+<ol>
+<li>Come al passo 2 con Tipo <em>Peso</em>, ultimi 21 giorni, senza raggruppare, riga <code>P;yyyy-MM-dd;Valore</code> → variabile <code>Peso</code>.</li>
+<li>Come al passo 2 con Tipo <em>Energia attiva</em>, raggruppa per giorno, riga <code>E;yyyy-MM-dd;Valore</code> → variabile <code>Energia</code>.</li>
+<li>Facoltativo: se il tuo iPhone ha l’azione <span class="act">Trova allenamenti</span>, ultimi 7 giorni, riga
+<code>W;</code>Data di inizio <code>yyyy-MM-dd'T'HH:mm</code><code>;</code>Durata in minuti<code>;</code>Tipo<code>;</code>Energia → variabile <code>Allenamenti</code>.</li>
+</ol>
+</section>
+
+<section>
+<h2>4. Calendario (prossimi 14 giorni)</h2>
+<ol>
+<li>Aggiungi <span class="act">Trova eventi del calendario</span>: Data di inizio <em>è tra</em> <em>Oggi</em> e <em>tra 14 giorni</em> (puoi scegliere solo i calendari che usi).</li>
+<li><span class="act">Ripeti con ogni elemento</span> → <span class="act">Testo</span>:
+<code>C;</code> Data di inizio <code>yyyy-MM-dd'T'HH:mm</code> <code>;</code> Data di fine <code>yyyy-MM-dd'T'HH:mm</code> <code>;</code> Titolo.
+<br><span class="muted">Esempio: C;2026-11-20T19:00;2026-11-20T20:00;Calcetto</span></li>
+<li><span class="act">Combina testo</span> con <em>Nuova riga</em> → variabile <code>Calendario</code>.</li>
+</ol>
+<p class="muted">L’app riconosce da sola parole come calcetto, partita, corsa, palestra, padel, tennis, nuoto, bici, yoga, camminata.
+Il giorno dopo uno sport intenso ti propone un recupero leggero.</p>
+</section>
+
+<section>
+<h2>5. Unisci tutto</h2>
+<ol>
+<li>Aggiungi <span class="act">Testo</span> con le variabili una per riga: <code>Passi</code>, <code>Peso</code>, <code>Energia</code>, <code>Allenamenti</code>, <code>Calendario</code>.</li>
+</ol>
+</section>
+
+<section>
+<h2>6. Invia all’app</h2>
+<p><strong>Safari (consigliato):</strong></p>
+<ol>
+<li><span class="act">Codifica URL</span> sul testo del passo 5.</li>
+<li><span class="act">URL</span>: <code id="url">https://TUO-INDIRIZZO/salute/#import=</code> seguito dal testo codificato.</li>
+<li><span class="act">Apri URL</span>. Salute si apre e mostra «Importati: …».</li>
+</ol>
+<p><strong>App sulla schermata Home:</strong> <span class="act">Copia negli appunti</span> il testo del passo 5, poi apri Salute → Profilo → <em>Importa dagli appunti</em>.</p>
+</section>
+
+<section>
+<h2>7. Automatico ogni mattina</h2>
+<ol>
+<li>Comandi → <strong>Automazione</strong> → <strong>+</strong> → <em>Ora del giorno</em>: 07:30, ogni giorno, <em>Esegui subito</em>.</li>
+<li>Azione: <span class="act">Esegui comando rapido</span> → <code>Salute: sincronizza</code>.</li>
+<li>Opzionale: una seconda automazione la <strong>domenica alle 10:00</strong> che apre l’app sulla spesa
+(<span class="act">Apri URL</span> <code id="url2">https://TUO-INDIRIZZO/salute/#/spesa</code>).</li>
+</ol>
+<p class="muted">La prima volta iOS chiede il permesso di leggere Salute e Calendario: concedilo solo per i tipi elencati.</p>
+</section>
+
+<section>
+<h2>Prova senza Comando Rapido</h2>
+<p>In <em>Profilo → Dati di Salute</em> incolla queste righe e tocca «Importa testo»:</p>
+<pre><code>S;2026-11-18;8421
+P;2026-11-18;71,2
+C;2026-11-20T19:00;2026-11-20T20:00;Calcetto</code></pre>
+</section>
+<p><a href="./#/profilo">← Torna a Salute</a></p>
+</main>
+<script>
+  // show the real address of this installation in the examples
+  const base = location.href.replace(/guida-comando-rapido\.html.*$/, '');
+  document.getElementById('url').textContent = base + '#import=';
+  document.getElementById('url2').textContent = base + '#/spesa';
+</script>
+</body>
+</html>

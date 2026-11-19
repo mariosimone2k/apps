@@ -1,0 +1,16 @@
+{
+  "name": "Salute: alimentazione e allenamento",
+  "short_name": "Salute",
+  "description": "Menu, spesa e allenamento che si adattano a te. I dati restano sul telefono.",
+  "start_url": "./#/oggi",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f4f6f3",
+  "theme_color": "#1f7a5a",
+  "lang": "it",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
