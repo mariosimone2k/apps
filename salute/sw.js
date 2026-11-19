@@ -1,6 +1,6 @@
 // Salute service worker: network-first for the page, cache-first for static assets,
 // so the app opens offline. Cross-origin requests (Gemini) are never cached.
-const CACHE = 'salute-v1';
+const CACHE = 'salute-v2';
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(['./', './manifest.webmanifest', './icon-192.png'])));
   self.skipWaiting();
