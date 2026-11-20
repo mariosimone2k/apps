@@ -20,7 +20,8 @@
 </head>
 <body>
 <main>
-<h1>Comando Rapido «Salute: sincronizza»</h1>
+<h1>Collegare Salute ad Apple Salute e Fitness</h1>
+<p>Servono due Comandi Rapidi: <strong>«Salute: sincronizza»</strong> (da Salute e Fitness verso l’app) e <strong>«Salute: registra»</strong> (dall’app verso Salute di Apple). Si creano una volta sola, poi li avvii con i pulsanti 🔄 e ❤️ dell’app.</p>
 <p class="muted">Un’app web non può leggere direttamente Salute e Calendario. Questo comando legge i dati sul tuo iPhone
 e li passa all’app. Niente passa da un server: i dati viaggiano nell’indirizzo della pagina (dopo il simbolo #) o negli appunti.</p>
 
@@ -60,6 +61,17 @@ usa «Copia negli appunti», poi apri l’app e tocca <em>Profilo → Importa da
 </section>
 
 <section>
+<h2>3b. Anelli di Fitness, sonno e cuore (consigliato)</h2>
+<p class="muted">Servono per gli anelli in «Oggi» e per capire se sei recuperato. I nomi possono variare leggermente con la versione di iOS; quelli che non trovi puoi saltarli.</p>
+<ol>
+<li>Come al passo 2 con Tipo <em>Minuti di esercizio</em>, raggruppa per giorno, riga <code>X;yyyy-MM-dd;Valore</code> → variabile <code>Esercizio</code>.</li>
+<li>Tipo <em>Ore in piedi</em> (o <em>Minuti in piedi</em>, dividi per 60 con <span class="act">Calcola</span>), raggruppa per giorno, riga <code>H;yyyy-MM-dd;Valore</code> → <code>InPiedi</code>.</li>
+<li>Tipo <em>Analisi del sonno</em>, ultimi 3 giorni: per ogni campione riga <code>D;</code>Data di <strong>fine</strong> <code>yyyy-MM-dd</code><code>;</code>Durata in ore → <code>Sonno</code> (l’app somma le fasi della stessa notte).</li>
+<li>Tipo <em>Frequenza cardiaca a riposo</em>, ultimi 10 giorni, raggruppa per giorno, riga <code>R;yyyy-MM-dd;Valore</code> → <code>Cuore</code> (serve l’Apple Watch).</li>
+</ol>
+</section>
+
+<section>
 <h2>4. Calendario (prossimi 14 giorni)</h2>
 <ol>
 <li>Aggiungi <span class="act">Trova eventi del calendario</span>: Data di inizio <em>è tra</em> <em>Oggi</em> e <em>tra 14 giorni</em> (puoi scegliere solo i calendari che usi).</li>
@@ -75,19 +87,40 @@ Il giorno dopo uno sport intenso ti propone un recupero leggero.</p>
 <section>
 <h2>5. Unisci tutto</h2>
 <ol>
-<li>Aggiungi <span class="act">Testo</span> con le variabili una per riga: <code>Passi</code>, <code>Peso</code>, <code>Energia</code>, <code>Allenamenti</code>, <code>Calendario</code>.</li>
+<li>Aggiungi <span class="act">Testo</span> con le variabili una per riga: <code>Passi</code>, <code>Peso</code>, <code>Energia</code>, <code>Esercizio</code>, <code>InPiedi</code>, <code>Sonno</code>, <code>Cuore</code>, <code>Allenamenti</code>, <code>Calendario</code>.</li>
 </ol>
 </section>
 
 <section>
 <h2>6. Invia all’app</h2>
-<p><strong>Safari (consigliato):</strong></p>
+<p><strong>Per entrambi i casi</strong> metti prima <span class="act">Copia negli appunti</span> sul testo del passo 5: se usi l’app dalla schermata Home, al ritorno tocca il banner «📥 Tocca per importare».</p>
+<p><strong>Safari:</strong></p>
 <ol>
 <li><span class="act">Codifica URL</span> sul testo del passo 5.</li>
 <li><span class="act">URL</span>: <code id="url">https://TUO-INDIRIZZO/salute/#import=</code> seguito dal testo codificato.</li>
 <li><span class="act">Apri URL</span>. Salute si apre e mostra «Importati: …».</li>
 </ol>
 <p><strong>App sulla schermata Home:</strong> <span class="act">Copia negli appunti</span> il testo del passo 5, poi apri Salute → Profilo → <em>Importa dagli appunti</em>.</p>
+</section>
+
+<section>
+<h2>6b. Il secondo comando: «Salute: registra» (dall’app a Salute di Apple)</h2>
+<p class="muted">Scrive in Salute di Apple ciò che registri nell’app: così calorie, macro, acqua, peso e vita compaiono anche nell’app Salute e nei suoi grafici.</p>
+<ol>
+<li>Nuovo comando chiamato esattamente <code>Salute: registra</code>. Nei dettagli del comando attiva <em>Mostra in Condivisione</em> e accetta <em>Testo</em> come input.</li>
+<li><span class="act">Ottieni dizionario da</span> → <em>Input comando rapido</em>.</li>
+<li>Per ciascuna coppia chiave → tipo di Salute aggiungi <span class="act">Ottieni valore per</span> la chiave e poi <span class="act">Registra campione Salute</span> con quel valore:
+<ul>
+<li><code>kcal</code> → <em>Energia alimentare</em> (kcal)</li>
+<li><code>protein</code> → <em>Proteine</em> (g)</li>
+<li><code>carbs</code> → <em>Carboidrati</em> (g)</li>
+<li><code>fat</code> → <em>Grassi totali</em> (g)</li>
+<li><code>water_ml</code> → <em>Acqua</em> (ml)</li>
+<li><code>weight_kg</code> → <em>Peso</em> (kg), solo <span class="act">Se</span> il valore ha qualcosa</li>
+<li><code>waist_cm</code> → <em>Circonferenza vita</em> (cm), solo se presente</li>
+</ul></li>
+<li>Prova dall’app: <em>+ → ❤️ Invia a Salute di Apple</em>. L’app invia solo la parte non ancora inviata, quindi puoi premerlo più volte al giorno senza doppioni.</li>
+</ol>
 </section>
 
 <section>
@@ -105,6 +138,11 @@ Il giorno dopo uno sport intenso ti propone un recupero leggero.</p>
 <h2>Prova senza Comando Rapido</h2>
 <p>In <em>Profilo → Dati di Salute</em> incolla queste righe e tocca «Importa testo»:</p>
 <pre><code>S;2026-11-18;8421
+E;2026-11-18;430
+X;2026-11-18;35
+H;2026-11-18;10
+D;2026-11-18;7,1
+R;2026-11-18;58
 P;2026-11-18;71,2
 C;2026-11-20T19:00;2026-11-20T20:00;Calcetto</code></pre>
 </section>
